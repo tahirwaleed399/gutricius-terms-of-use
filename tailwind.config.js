@@ -27,6 +27,12 @@ module.exports = {
       colors: {
         primary: colors.pink,
         gray: colors.gray,
+       
+        'primary-light': '#DDAF29', 
+        'primary-dark': '#c4981f8e',
+        'grey':'#848484',
+        'text-grey':'#58626c',
+        'light-section-heading': '#fff8f7',
       },
       typography: ({ theme }) => ({
         DEFAULT: {

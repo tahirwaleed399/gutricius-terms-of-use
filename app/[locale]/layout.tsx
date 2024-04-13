@@ -1,4 +1,9 @@
-import 'css/tailwind.css'
+'use client';
+import 'css/tailwind.css';
+import 'css/extractedStyles.css';
+import 'css/globals.css';
+
+
 import 'pliny/search/algolia.css'
 
 import { Space_Grotesk } from 'next/font/google'
@@ -6,10 +11,13 @@ import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
-import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata' 
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
+import { Navigation } from '@/components/Navigation';
+import { useState } from 'react';
+import Footer from '@/components/Footer/Footer';
+
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -17,47 +25,14 @@ const space_grotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
 })
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteMetadata.siteUrl),
-  title: {
-    default: siteMetadata.title,
-    template: `%s | ${siteMetadata.title}`,
-  },
-  description: siteMetadata.description,
-  openGraph: {
-    title: siteMetadata.title,
-    description: siteMetadata.description,
-    url: './',
-    siteName: siteMetadata.title,
-    images: [siteMetadata.socialBanner],
-    locale: 'en_US',
-    type: 'website',
-  },
-  alternates: {
-    canonical: './',
-    types: {
-      'application/rss+xml': `${siteMetadata.siteUrl}/feed.xml`,
-    },
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  twitter: {
-    title: siteMetadata.title,
-    card: 'summary_large_image',
-    images: [siteMetadata.socialBanner],
-  },
-}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [navOpen , setNavOpen] =  useState<boolean>(false);
+  const [isLangBtnHovered , setIsLangBtnHovered] = useState(false);
+  const [langOpen , setLangOpen] =  useState<boolean>(false);
+  const langToggle = ()=>setLangOpen(!navOpen);
+
   return (
     <html
       lang={siteMetadata.language}
@@ -77,14 +52,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
-            <div className="flex h-screen flex-col justify-between font-sans">
-              <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-                <Header />
+            <div className="flex  flex-col justify-between font-sans">
+            
+              <div className="transparent-lang" onClick={()=>setLangOpen(!langOpen)}>
+            </div>
+            <div className="transparent-menu" onClick={()=>setNavOpen(!navOpen)}>
+            </div>
+            <div className="transparent-logo" onClick={()=>{}}>
+            </div>
+  
+              <Navigation section={'dark'} navOpen={navOpen} langOpen={langOpen} setLangOpen={setLangOpen} setNavOpen={setNavOpen} isHovered={isHovered} setIsHovered={setIsHovered} isLangBtnHovered={isLangBtnHovered} setIsLangBtnHovered={setIsLangBtnHovered} />
                 <main className="mb-auto">{children}</main>
-              </SearchProvider>
-              <Footer />
+          
             </div>
           </SectionContainer>
+          <Footer  />
+
         </ThemeProviders>
       </body>
     </html>

@@ -1,7 +1,7 @@
 import ListLayout from '@/layouts/ListLayout' // Assuming ListLayout is a generic layout without tags
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allBlogs } from 'contentlayer/generated'
-import { genPageMetadata } from 'app/seo'
+import { genPageMetadata } from 'app/[locale]/seo'
 
 const POSTS_PER_PAGE = 100
 
