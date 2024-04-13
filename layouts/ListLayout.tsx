@@ -73,6 +73,8 @@ export default function ListLayout({
     return searchContent.toLowerCase().includes(searchValue.toLowerCase())
   })
 
+  console.log({posts})
+
   const locale= useLocale();
  
   const displayPosts =

@@ -1,42 +1,39 @@
+'use client';
 import classNames from "classnames";
 import Image from "next/image";
+
+import {createSharedPathnamesNavigation} from 'next-intl/navigation';
 import { useState, useTransition } from "react";
 import { CiGlobe } from "react-icons/ci";
 import { Popover } from "react-tiny-popover";
-import { languages } from "../../utils/languages";
+import { languages , locales } from "../../utils/languages";
 // import { useLocale } from "next-intl";
-import { useParams, usePathname, useRouter } from "next/navigation";
+// import { useParams, usePathname, useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 
 export const Navigation = ({ section , navOpen  , langOpen , setLangOpen , setNavOpen ,isHovered , setIsHovered, isLangBtnHovered  , setIsLangBtnHovered }: { section: "light" | "dark" , navOpen:boolean , langOpen : boolean , setLangOpen : any  , setNavOpen : any , isHovered : any , setIsHovered : any , setIsLangBtnHovered: any , isLangBtnHovered : any }) => {
 
   const [isPending, startTransition] = useTransition();
-  const router = useRouter();
-  const pathname = usePathname();
-  const params = useParams();
-
+  const {Link, useRouter, usePathname, redirect} = createSharedPathnamesNavigation({locales});
   const localActive = useLocale();
+  const router = useRouter();
+  const pathName = usePathname();
   const [selectedLanguage, setSelectedLanguage] = useState(localActive);
-  const changeLanguage = (newLocale : string) => {
+  const changeLanguage = (newLocale) => {
+  let newPathName = pathName;
+  if (pathName.includes('/blog/')) {
+   
+    const regex = new RegExp(`\/(${locales.join('|')})$`);
     
-    startTransition(() => {
-      // Split the pathname into segments
-      const segments = pathname.split('/');
-      
-      // Assuming the first segment could be the locale, check if it's in a valid locale format
-      if (segments.length > 1 && /[a-z]{2}-[a-z]{2}/i.test(segments[1])) {
-        // Replace the current locale (second segment) with the new one
-        segments[1] = newLocale;
-      } else {
-        // If the first segment isn't a valid locale, we insert the new locale right after the initial '/'
-        // Only do this if there isn't already a locale there
-        segments.splice(1, 0, newLocale);
-      }
+   
+    newPathName = pathName.replace(regex, `/${newLocale}`);
+  }
   
-      // Reconstruct the pathname
-      const newPathname = segments.join('/');
-      router.replace(newPathname, undefined);
-    });
+   
+    console.log({ newPathName });
+  
+   
+    router.push(newPathName, { locale: newLocale });
   };
   
   return (

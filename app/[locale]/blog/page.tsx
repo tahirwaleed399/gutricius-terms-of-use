@@ -7,10 +7,10 @@ const POSTS_PER_PAGE = 100
 
 export const metadata = genPageMetadata({ title: 'Blog' })
 
-export default function BlogPage() {
+export default function BlogPage({params : {locale}}) {
   const posts = allCoreContent(sortPosts(allBlogs))
   const pageNumber = 1
-  const initialDisplayPosts = posts.slice(
+  const initialDisplayPosts = posts.filter((post)=>post.key === locale).slice(
     POSTS_PER_PAGE * (pageNumber - 1),
     POSTS_PER_PAGE * pageNumber
   )
@@ -18,14 +18,19 @@ export default function BlogPage() {
     currentPage: pageNumber,
     totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
   }
+  console.log({posts})
 
   return (
+    <>
+
+
     <ListLayout
-      posts={posts}
+      posts={posts.filter((post)=>post.key === locale)}
       initialDisplayPosts={initialDisplayPosts}
       pagination={pagination}
       title="All Posts"
-      // Here, any tag-related props or functionality should be removed or commented out
+      
     />
+    </>
   )
 }

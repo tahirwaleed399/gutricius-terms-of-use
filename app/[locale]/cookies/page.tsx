@@ -3,9 +3,9 @@ import MarkdownRenderer from "@/components/MarkdownRenderer";
 import fs from 'fs';
 import path from 'path';
 
-export default function Page() {
+export default function Page({params : {locale}}) {
 
-  const markdownFilePath = path.join(process.cwd(), 'content/cookies', 'cookies.md');
+  const markdownFilePath = path.join(process.cwd(), 'content/cookies', `${locale}.md`);
   const content = fs.readFileSync(markdownFilePath, 'utf-8');
 
   return (
