@@ -1,4 +1,3 @@
-'use client';
 import 'css/tailwind.css';
 import 'css/extractedStyles.css';
 import 'css/globals.css';
@@ -17,7 +16,8 @@ import { Metadata } from 'next'
 import { Navigation } from '@/components/Navigation';
 import { useState } from 'react';
 import Footer from '@/components/Footer/Footer';
-
+import { NextIntlClientProvider, useMessages } from "next-intl";
+import ClientLayout from './ClientLayout';
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -26,13 +26,15 @@ const space_grotesk = Space_Grotesk({
 })
 
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [navOpen , setNavOpen] =  useState<boolean>(false);
-  const [isLangBtnHovered , setIsLangBtnHovered] = useState(false);
-  const [langOpen , setLangOpen] =  useState<boolean>(false);
-  const langToggle = ()=>setLangOpen(!navOpen);
-
+export default function RootLayout({
+  children,
+  params: {locale}
+}: {
+  children: React.ReactNode;
+  params: {locale: string};
+}) {
+ 
+  const messages = useMessages();
   return (
     <html
       lang={siteMetadata.language}
@@ -49,26 +51,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
-        <ThemeProviders>
-          <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-          <SectionContainer>
-            <div className="flex  flex-col justify-between font-sans">
-            
-              <div className="transparent-lang" onClick={()=>setLangOpen(!langOpen)}>
-            </div>
-            <div className="transparent-menu" onClick={()=>setNavOpen(!navOpen)}>
-            </div>
-            <div className="transparent-logo" onClick={()=>{}}>
-            </div>
-  
-              <Navigation section={'dark'} navOpen={navOpen} langOpen={langOpen} setLangOpen={setLangOpen} setNavOpen={setNavOpen} isHovered={isHovered} setIsHovered={setIsHovered} isLangBtnHovered={isLangBtnHovered} setIsLangBtnHovered={setIsLangBtnHovered} />
-                <main className="mb-auto">{children}</main>
+      <NextIntlClientProvider locale={locale} messages={messages}>
           
-            </div>
-          </SectionContainer>
-          <Footer  />
-
+        <ThemeProviders>
+         <ClientLayout>
+          {children}
+         </ClientLayout>
         </ThemeProviders>
+
+        </NextIntlClientProvider>
       </body>
     </html>
   )

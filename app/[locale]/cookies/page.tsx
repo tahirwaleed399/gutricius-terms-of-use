@@ -10,7 +10,7 @@ export default function Page({params : {locale}}) {
 
   return (
     <>
-    <div className="text-data-sizes ">
+    <div className="text-data-sizes custom-container-sm ">
     <div className="fixed [z-index:0] overflow-hidden top-0 left-0 w-full h-full [user-select:none] pointer-events-none opacity-100 blur-sm">
     <ImageAnimation />
     </div>

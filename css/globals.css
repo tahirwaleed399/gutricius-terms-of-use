@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Inter:wght@200;300;400;500;600;800&display=swap");
 
 @font-face {
   font-family: "CeraPro";
@@ -20,9 +20,12 @@
   
 }
 
-
+.custom-container-sm {
+  max-width: 900px;
+  width: 95vw;
+  margin-inline: auto;
+}
 html {
-  font-size: 62.5%;
   @apply antialiased;
 }
 
@@ -37,6 +40,7 @@ scroll-behavior: smooth;
 }
 
 html {
+  font-size: 62.5%;
   scroll-behavior : smooth;
 }
 * {
@@ -46,6 +50,7 @@ html {
 strong {
   font-weight: bold !important;
 }
+/* COLORS */
 :root {
   --color-primary: #ffb900;
   --color-primary-light: #e9ce5d;
@@ -78,16 +83,21 @@ strong {
   --padding-inline: 24px;
 }
 
+/* FONT */
+:root {
+  --default-font-size: 1.6rem;
+}
 
+/* GRID */
+:root {
+  --grid-width: 114rem;
+  --gutter-vertical: 8rem;
+  --gutter-horizontal: 6rem;
+}
 
 
 .custom-container {
   max-width: 1296px;
-  width: 95vw;
-  margin-inline: auto;
-}
-.custom-container-sm {
-  max-width: 900px;
   width: 95vw;
   margin-inline: auto;
 }
@@ -528,6 +538,9 @@ margin: auto;
   .transparent-lang ,.transparent-menu , .transparent-logo {
     display: block;
   }
+  .hovered-class :nth-child(1)::before, .hovered-class :nth-child(2)::before {
+    left :-0.5px !important;
+  }
 }
 @media  (min-width : 768px){
   .lined-text-box {
@@ -687,7 +700,7 @@ color: #090611;
   width: 2.5rem;
   height: 3px;
   position: absolute;
-  left: 0;
+  left: 1.7px;
   transition: transform .1596s cubic-bezier(.52,.16,.52,.84) .1008s;
 }
 
@@ -698,7 +711,7 @@ color: #090611;
 
 .menu__icon span:nth-child(2)::before {
   bottom: .625rem;
-  transform: translateY(7px);
+  transform: translateY(8px);
 }
 .hovered-class  {
   scale: 1.1;
@@ -712,6 +725,8 @@ color: #090611;
  .hovered-class :nth-child(2)::before {
   transform: none !important;
   transition: transform .1806s cubic-bezier(.04,.04,.12,.96);
+  top: 8px;
+  left: 0.79px;
 }
 
  .hovered-class :nth-child(1) {
@@ -824,6 +839,7 @@ width : 2.7rem;
 .btn-primary.secondary:hover {
   background-color: #f6b9ae ;
   color : #45312e;
+  border-color: #8250fb;
 }
 
 footer input:-webkit-autofill,
@@ -832,7 +848,6 @@ footer input:-webkit-autofill:focus,
 footer input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px #f8e43f inset !important;
 }
-
 
 .text-data-sizes {
   font-size: 20px;

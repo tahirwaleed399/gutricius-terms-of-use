@@ -26,7 +26,7 @@ export default function Page({
   
   return (
 
-      <div className="text-data-sizes ">
+      <div className="text-data-sizes  custom-container-sm">
         <div className="pointer-events-none fixed left-0 top-0 h-full w-full overflow-hidden opacity-100 blur-sm [user-select:none] [z-index:0]">
           <PrivacyAnimation />
         </div>
