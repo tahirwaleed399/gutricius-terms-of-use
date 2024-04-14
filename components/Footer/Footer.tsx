@@ -52,7 +52,7 @@ const Footer: React.FC<{footerBg : string}> = ({footerBg}) => {
   return (
     <footer
       id="footer"
-      className="w-full relative overflow-hidden pb-10 bg-no-repeat bg-cover grid place-items-center"
+      className="w-full relative overflow-hidden pb-10 bg-no-repeat bg-cover grid place-items-center mt-32 web-color"
     >
       <div className="max-w-[700px]">
         <h1 className="font-bold text-black text-5xl md:text-7xl text-center mb-10">

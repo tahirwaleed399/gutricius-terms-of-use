@@ -7,6 +7,8 @@ const POSTS_PER_PAGE = 100
 
 export const metadata = genPageMetadata({ title: 'Blog' })
 
+export const dynamic = 'force-dynamic';
+
 export default function BlogPage({params : {locale}}) {
   const posts = allCoreContent(sortPosts(allBlogs))
   const pageNumber = 1
@@ -18,8 +20,7 @@ export default function BlogPage({params : {locale}}) {
     currentPage: pageNumber,
     totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
   }
-  console.log({posts})
-
+ 
   return (
     <>
 
