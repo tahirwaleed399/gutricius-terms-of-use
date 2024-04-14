@@ -93,10 +93,40 @@ export const Blog = defineDocumentType(() => ({
   },
 }))
 
+export const CaseStudy = defineDocumentType(() => ({
+  name: 'CaseStudy',
+  filePathPattern: 'CaseStudies/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    summary: { type: 'string' },
+    key : {type : 'string' , required : true },
+    url : {type : 'string' , required : true }
+
+  },
+  computedFields: {
+    ...computedFields,
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: doc.title,
+        datePublished: doc.date,
+  
+        description: doc.summary,
+      
+      }),
+    },
+  },
+}))
+
+
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog],
+  documentTypes: [Blog , CaseStudy],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
