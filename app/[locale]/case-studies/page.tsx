@@ -14,7 +14,7 @@ const Page = ({params : {locale}}) => {
   <div className='custom-container-sm cursor-pointer  '>
   <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-20">
           {caseStudyWithLocales.map((study) => (
-          <Link href={study.url} target='_blank' >
+          <Link href={study.url as string} target='_blank' >
            <div className='border-text-grey border-2 p-10 rounded-lg'>
            <div>
            <h3 className='text-3xl'>{study.title}</h3>
