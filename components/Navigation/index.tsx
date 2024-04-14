@@ -39,7 +39,7 @@ export const Navigation = ({ section , navOpen  , langOpen , setLangOpen , setNa
   return (
     <nav
       className={
-        "flex w-full justify-between items-center  mx-auto px-[1rem] md:px-0 " +
+        "flex w-full justify-between items-center  mx-auto pl-[8px] " +
         section
       }
     >
