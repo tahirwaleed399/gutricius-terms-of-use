@@ -36,10 +36,12 @@
     "**/*.mjs",
     "**/*.ts",
     "**/*.tsx",
+    "**/*.jsx",
+
     "**/*.json",
     ".contentlayer/generated",
     ".contentlayer/generated/**/*.json",
     ".next/types/**/*.ts"
-  ],
+, "components/MarkdownRenderer.jsx", "components/canvas/ImageAnimation.jsx"  ],
   "exclude": ["node_modules"]
 }
