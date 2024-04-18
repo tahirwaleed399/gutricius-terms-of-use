@@ -34,7 +34,7 @@ html,
 body {
   @apply h-full;
   background-color: var(--color-secondary-dark);
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 position: relative;
 scroll-behavior: smooth;
 
@@ -652,10 +652,7 @@ color: #090611;
   background-color: black;
 
 }
-.light .menu__icon {
-  background-color: white;
 
-}
 .dark .menu__icon span:before {
  
   background-color: white;
@@ -663,13 +660,7 @@ color: #090611;
 
 
 }
-.light .menu__icon span:before {
- 
-    background-color: black;
-  
-  
 
-}
 
 .menu__icon {
  
